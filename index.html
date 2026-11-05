@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle Sports Toto · Tarot Jackpot</title>
+  <style>
+    :root {
+      --bg-void: #0b0710;
+      --card-bg: rgba(18, 14, 28, 0.75);
+      --gold: #d4af37;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --silver: #b0b8c5;
+      --purple-deep: #3a1f4b;
+      --purple-mist: #6b4a7a;
+      --cyan-mystic: #8ecae6;
+      --text-main: #e6e3ef;
+      --text-dim: #a9a4b8;
+      --border-ethereal: rgba(212, 175, 55, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', 'Times New Roman', 'Georgia', serif;
+      background: radial-gradient(ellipse at 50% 0%, #1e152b 0%, #0b0710 70%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    /* starry veil */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(2px 2px at 15% 25%, rgba(255, 240, 200, 0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 12%, rgba(212, 175, 55, 0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 42% 68%, rgba(255, 255, 255, 0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(200, 180, 255, 0.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 5% 92%, rgba(255, 220, 150, 0.3) 0%, transparent 100%);
+      background-size: 200px 200px;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    /* gothic decorative border */
+    .oracle-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .oracle-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -12px -12px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 0.5rem 0 0.2rem;
+    }
+
+    h1 {
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      font-weight: 600;
+      font-size: 2.6rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #f3e3b0 0%, #b8942e 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px var(--gold-glow);
+      margin-bottom: 0.3rem;
+      word-spacing: 8px;
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--silver);
+      letter-spacing: 2px;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-ethereal);
+      border-radius: 28px;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+      transition: box-shadow 0.3s ease;
+      width: 100%;
+    }
+
+    .card:hover {
+      box-shadow: 0 30px 50px -15px #000, 0 0 0 1px rgba(212, 175, 55, 0.3) inset;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-weight: 500;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 0.65rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: "✦";
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* --- History grid refined --- */
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .history-item {
+      background: linear-gradient(145deg, rgba(10, 7, 18, 0.7) 0%, rgba(30, 22, 45, 0.5) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 16px;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+      box-shadow: 0 8px 12px -8px #000;
+    }
+
+    .history-item:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .history-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--gold);
+      opacity: 0.9;
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .prize-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .prize-num {
+      font-family: 'Courier New', monospace;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #f0e6c5;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+      letter-spacing: 2px;
+    }
+
+    /* --- Oracle section --- */
+    .oracle-section {
+      text-align: center;
+      position: relative;
+    }
+
+    .oracle-section p {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin: 0 auto 1rem;
+      font-style: italic;
+      letter-spacing: 0.3px;
+    }
+
+    .crystal-ball {
+      width: 130px;
+      height: 130px;
+      margin: 1rem auto 0.8rem;
+      background: radial-gradient(circle at 35% 30%, #ddcbb0, #917b5c 50%, #2a1f2e 90%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.4), 0 0 20px #6b4a7a inset, 0 0 25px #c9a94b;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 2px solid rgba(212, 175, 55, 0.7);
+      filter: drop-shadow(0 10px 15px #00000080);
+      text-shadow: 0 0 15px #f7eac6;
+    }
+
+    .crystal-ball:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 70px rgba(212, 175, 55, 0.7), 0 0 30px #8e6f9e inset;
+    }
+
+    .btn-predict {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
+      background: linear-gradient(145deg, #3a2a45, #1e152b);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.9rem 2.4rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px -8px #000, 0 0 15px rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    .btn-predict:hover {
+      background: linear-gradient(145deg, #4d395a, #2a1f37);
+      color: #f5e7bc;
+      border-color: #f5e7bc;
+      box-shadow: 0 0 25px var(--gold-glow), 0 10px 20px -8px #000;
+      letter-spacing: 3px;
+    }
+
+    /* --- Prediction cards --- */
+    .predictions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .prediction-card {
+      background: linear-gradient(135deg, rgba(20, 15, 30, 0.9) 0%, rgba(40, 30, 55, 0.7) 100%);
+      border-left: 6px solid var(--gold);
+      border-radius: 18px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 10px 25px -10px #000, 0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+      backdrop-filter: blur(5px);
+      transition: all 0.25s ease;
+    }
+
+    .prediction-card:hover {
+      border-left-color: #f5e7bc;
+      box-shadow: 0 15px 30px -10px #000, 0 0 0 1px rgba(212, 175, 55, 0.4) inset;
+    }
+
+    .tarot-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .tarot-icon {
+      font-size: 2.4rem;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+    }
+
+    .tarot-details {
+      text-align: left;
+    }
+
+    .tarot-name {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+    }
+
+    .tarot-desc {
+      font-size: 0.8rem;
+      color: var(--silver);
+      font-style: italic;
+      max-width: 220px;
+    }
+
+    .combo-box {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .combo-numbers {
+      font-family: 'Courier New', monospace;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #e6dbb0;
+      text-shadow: 0 0 12px var(--gold-glow);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.15rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .confidence {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #a7c0b0;
+      font-weight: 400;
+    }
+
+    .confidence::before {
+      content: "✦ ";
+      color: var(--gold);
+      font-size: 0.6rem;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 680px) {
+      h1 { font-size: 1.9rem; letter-spacing: 3px; }
+      .history-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+      .prediction-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .combo-box { text-align: left; width: 100%; }
+      .combo-numbers { display: inline-block; }
+      .tarot-info { width: 100%; }
+      .tarot-desc { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 1.2rem; }
+      .crystal-ball { width: 100px; height: 100px; font-size: 2.5rem; }
+      .btn-predict { padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+    }
+
+    /* Load fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+  </style>
+</head>
+<body>
+
+  <div class="oracle-wrapper">
+    <header>
+      <h1>Sports Toto Oracle</h1>
+      <p class="subtitle">✦ Tarot & Pattern Jackpot Divination ✦</p>
+    </header>
+
+    <!-- Past results -->
+    <div class="card">
+      <h2>Chronicles of Fortune</h2>
+      <div class="history-grid">
+        <div class="history-item">
+          <div class="history-date">04/11/2026 · Draw 6208/26</div>
+          <div class="prize-title">1st <span class="prize-num">5833</span></div>
+          <div class="prize-title">2nd <span class="prize-num">5984</span></div>
+          <div class="prize-title">3rd <span class="prize-num">0356</span></div>
+        </div>
+        <div class="history-item">
+          <div class="history-date">01/11/2026 · Draw 6207/26</div>
+          <div class="prize-title">1st <span class="prize-num">2270</span></div>
+          <div class="prize-title">2nd <span class="prize-num">9276</span></div>
+          <div class="prize-title">3rd <span class="prize-num">4275</span></div>
+        </div>
+        <div class="history-item">
+          <div class="history-date">31/10/2026 · Draw 6206/26</div>
+          <div class="prize-title">1st <span class="prize-num">0878</span></div>
+          <div class="prize-title">2nd <span class="prize-num">2783</span></div>
+          <div class="prize-title">3rd <span class="prize-num">1789</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Oracle divination -->
+    <div class="card oracle-section">
+      <h2>Consult the Arcana</h2>
+      <p>Frequency resonance (7 · 8 · 2 · 5 · 3) merged with Tarot archetypes</p>
+      
+      <div class="crystal-ball" id="crystalBall" onclick="generatePrediction()" title="Touch the orb">🔮</div>
+      <button class="btn-predict" onclick="generatePrediction()">Draw the Cards</button>
+
+      <div class="predictions-container" id="predictions">
+        <!-- dynamic predictions -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Past top prizes data
+    const pastResults = [
+      ["5833", "5984", "0356"],
+      ["2270", "9276", "4275"],
+      ["0878", "2783", "1789"]
+    ];
+
+    // Expanded tarot deck (major arcana)
+    const tarotCards = [
+      { name: "The Wheel of Fortune", icon: "🎡", desc: "Destiny's cycle favours the bold." },
+      { name: "The Star", icon: "⭐", desc: "A guiding light reveals hidden numbers." },
+      { name: "The Magician", icon: "🪄", desc: "Manifestation aligns with probability." },
+      { name: "The High Priestess", icon: "🌙", desc: "Intuitive patterns emerge from the veil." },
+      { name: "The Empress", icon: "👑", desc: "Abundance flows through fruitful combos." },
+      { name: "The Hierophant", icon: "📜", desc: "Tradition's key unlocks recurring digits." },
+      { name: "The Lovers", icon: "💞", desc: "Harmonious pairs draw the jackpot." },
+      { name: "The Chariot", icon: "⚔️", desc: "Momentum swings toward victory." },
+      { name: "Strength", icon: "🦁", desc: "Inner resolve amplifies lucky resonance." },
+      { name: "The Hermit", icon: "🏮", desc: "Solitary insight reveals hidden sequences." },
+      { name: "The Wheel", icon: "☸️", desc: "Fortune spins — seize the turning point." },
+      { name: "The Sun", icon: "☀️", desc: "Radiance illuminates the winning path." },
+      { name: "The Moon", icon: "🌕", desc: "Shadows and intuition guide the numbers." },
+      { name: "Judgement", icon: "📯", desc: "A clarion call to fateful combinations." },
+      { name: "The World", icon: "🌍", desc: "Completion brings the ultimate prize." }
+    ];
+
+    // Frequency analysis
+    function analyzeDigitFrequency() {
+      const counts = {};
+      pastResults.flat().forEach(numStr => {
+        for (let char of numStr) {
+          counts[char] = (counts[char] || 0) + 1;
+        }
+      });
+      return counts;
+    }
+
+    function generate4DNumber(freqMap) {
+      const digits = Object.keys(freqMap);
+      let result = "";
+      
+      // Sort by frequency descending (most common first)
+      const sortedDigits = digits.sort((a, b) => freqMap[b] - freqMap[a]);
+      
+      // Heavy bias to top 5 most frequent (7,8,2,5,3)
+      for (let i = 0; i < 4; i++) {
+        if (Math.random() > 0.3) {
+          // Pick from top 6 most frequent
+          const topSlice = sortedDigits.slice(0, 6);
+          const pick = topSlice[Math.floor(Math.random() * topSlice.length)];
+          result += pick;
+        } else {
+          // random digit 0-9
+          result += Math.floor(Math.random() * 10);
+        }
+      }
+      return result;
+    }
+
+    function generatePrediction() {
+      const freqMap = analyzeDigitFrequency();
+      const predictionsDiv = document.getElementById("predictions");
+      const crystalBall = document.getElementById("crystalBall");
+
+      // subtle orb animation
+      crystalBall.style.transform = "scale(1.15)";
+      setTimeout(() => crystalBall.style.transform = "scale(1)", 300);
+
+      const combos = [];
+      const usedCards = new Set();
+
+      for (let i = 0; i < 3; i++) {
+        const num1 = generate4DNumber(freqMap);
+        let num2 = generate4DNumber(freqMap);
+        while (num1 === num2) num2 = generate4DNumber(freqMap);
+
+        // pick unique tarot card
+        let cardIndex;
+        do {
+          cardIndex = Math.floor(Math.random() * tarotCards.length);
+        } while (usedCards.has(cardIndex));
+        usedCards.add(cardIndex);
+
+        const card = tarotCards[cardIndex];
+        const confidence = (82 + Math.floor(Math.random() * 15)) + "%";
+
+        combos.push({
+          rank: i + 1,
+          pair: `${num1} + ${num2}`,
+          tarot: card,
+          confidence: confidence
+        });
+      }
+
+      // render with more sophisticated markup
+      predictionsDiv.innerHTML = combos.map(item => `
+        <div class="prediction-card">
+          <div class="tarot-info">
+            <div class="tarot-icon">${item.tarot.icon}</div>
+            <div class="tarot-details">
+              <div class="tarot-name">${item.tarot.name} · Option ${item.rank}</div>
+              <div class="tarot-desc">${item.tarot.desc}</div>
+            </div>
+          </div>
+          <div class="combo-box">
+            <div class="combo-numbers">${item.pair}</div>
+            <div class="confidence">Alignment ${item.confidence}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Initial reading
+    window.onload = generatePrediction;
+  </script>
+</body>
+</html>
