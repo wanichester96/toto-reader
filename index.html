@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=UnifrakturCook:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Morandi-inspired palette — dusty, muted, witchy */
       --moss-veil: #5a5e4e;
       --moss-deep: #3d4035;
       --sage-dust: #8a8d7a;
@@ -52,7 +51,6 @@
       line-height: 1.55;
     }
 
-    /* ✦ whimsical floating motes of dust & starlight ✦ */
     body::before {
       content: "";
       position: fixed;
@@ -80,7 +78,6 @@
       to { transform: translate(-300px, -300px); }
     }
 
-    /* faint circular sigil backdrop */
     body::after {
       content: "";
       position: fixed;
@@ -102,7 +99,6 @@
       max-width: 780px;
     }
 
-    /* —— OLD ENGLISH / BLACKLETTER TITLE —— */
     h1 {
       font-family: 'UnifrakturMaguntia', 'UnifrakturCook', 'Cinzel', serif;
       font-weight: 400;
@@ -170,7 +166,6 @@
       gap: 2rem;
     }
 
-    /* ── arcane panel — Morandi dusty parchment ── */
     .card {
       position: relative;
       background:
@@ -218,7 +213,6 @@
       text-shadow: 0 0 12px var(--glow-soft);
     }
 
-    /* —— OLD ENGLISH SECTION HEADERS —— */
     h2 {
       font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
       font-weight: 400;
@@ -252,7 +246,6 @@
       background: linear-gradient(90deg, transparent, rgba(176, 138, 134, 0.35), transparent);
     }
 
-    /* ── featured prime oracle ── */
     .featured-prediction {
       background:
         radial-gradient(ellipse 75% 90% at 50% 0%, rgba(74, 52, 72, 0.55) 0%, transparent 70%),
@@ -355,7 +348,6 @@
       opacity: 0.6;
     }
 
-    /* ── divination control ── */
     .oracle-controls {
       text-align: center;
       padding: 2.2rem 1.5rem;
@@ -443,7 +435,6 @@
     }
     .btn-divine:hover::before { left: 100%; }
 
-    /* ── secondary arcana list ── */
     .secondary-list {
       display: flex;
       flex-direction: column;
@@ -517,7 +508,6 @@
       font-size: 0.55rem;
     }
 
-    /* ── history grid ── */
     .history-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -579,7 +569,138 @@
       text-shadow: 0 0 12px rgba(176, 138, 134, 0.2);
     }
 
-    /* data note */
+    /* ── ADMIN PANEL — inscribe new draw ── */
+    .admin-panel {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed rgba(176, 138, 134, 0.3);
+    }
+
+    .admin-toggle {
+      display: block;
+      margin: 0 auto;
+      font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: var(--sage-dust);
+      background: transparent;
+      border: 1px dashed rgba(176, 138, 134, 0.35);
+      padding: 0.5rem 1.4rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .admin-toggle:hover {
+      color: var(--parchment-warm);
+      border-color: var(--rose-faded);
+      background: rgba(107, 84, 104, 0.15);
+    }
+
+    .admin-form {
+      display: none;
+      margin-top: 1.5rem;
+      animation: card-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .admin-form.open { display: block; }
+
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .admin-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .admin-field.full { grid-column: 1 / -1; }
+
+    .admin-field label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.78rem;
+      letter-spacing: 1.2px;
+      color: var(--sage-dust);
+      text-transform: uppercase;
+    }
+
+    .admin-field input {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 1.5px;
+      color: var(--parchment-warm);
+      background: rgba(30, 24, 28, 0.8);
+      border: 1px solid rgba(176, 138, 134, 0.3);
+      border-radius: 2px;
+      padding: 0.55rem 0.8rem;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      width: 100%;
+    }
+    .admin-field input:focus {
+      border-color: var(--rose-faded);
+      box-shadow: 0 0 16px -4px rgba(176, 138, 134, 0.3);
+    }
+    .admin-field input::placeholder {
+      color: var(--ink-faded);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-admin {
+      font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      padding: 0.7rem 1.8rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      border: 1px solid rgba(176, 138, 134, 0.4);
+      background: linear-gradient(160deg, rgba(107, 84, 104, 0.35), rgba(42, 38, 32, 0.7));
+      color: var(--parchment-warm);
+      text-shadow: 0 1px 2px rgba(30, 24, 28, 0.7);
+    }
+    .btn-admin:hover {
+      color: var(--ink-soft);
+      background: linear-gradient(160deg, var(--parchment-faded), var(--rose-faded));
+      border-color: var(--parchment-warm);
+      box-shadow: 0 0 28px rgba(176, 138, 134, 0.35);
+      text-shadow: none;
+    }
+
+    .btn-admin.danger {
+      border-color: rgba(176, 138, 134, 0.3);
+      color: var(--rose-faded);
+      background: transparent;
+    }
+    .btn-admin.danger:hover {
+      color: var(--ink-soft);
+      background: linear-gradient(160deg, #c9a7a0, #b08a86);
+      border-color: #c9a7a0;
+    }
+
+    .admin-msg {
+      margin-top: 1rem;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      min-height: 1.2rem;
+      transition: opacity 0.3s ease;
+    }
+    .admin-msg.ok { color: #a8c0a0; }
+    .admin-msg.err { color: #c98a86; }
+
     .data-note {
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
@@ -599,7 +720,6 @@
       color: var(--rose-dust);
     }
 
-    /* ── responsive ── */
     @media (max-width: 720px) {
       body { padding: 2.2rem 0.9rem 3.5rem; }
       .card { padding: 1.7rem 1.2rem; }
@@ -614,6 +734,7 @@
       .prime-combo::before, .prime-combo::after { display: none; }
       .prime-combo { letter-spacing: 3px; }
       .tarot-seal { width: 76px; height: 76px; font-size: 1.9rem; }
+      .admin-form-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -669,63 +790,97 @@
     <div class="card">
       <span class="corner-glyph">☽</span>
       <h2>Alternative Arcana</h2>
-      <div class="secondary-list" id="secondaryList">
-        <!-- Rendered dynamically -->
-      </div>
+      <div class="secondary-list" id="secondaryList"></div>
     </div>
 
-    <!-- Historical Source -->
+    <!-- Historical Source with INLINE ADMIN PANEL -->
     <div class="card">
       <span class="corner-glyph">☽</span>
       <h2>Historical Pattern Source</h2>
-      <div class="history-grid" id="historyGrid">
-        <!-- Rendered dynamically from external data -->
-      </div>
+      <div class="history-grid" id="historyGrid"></div>
       <div class="data-note" id="dataNote">Last updated: —</div>
+
+      <!-- ADMIN PANEL -->
+      <div class="admin-panel">
+        <button class="admin-toggle" id="adminToggle" onclick="toggleAdminPanel()">☾ Inscribe a New Draw ☽</button>
+
+        <div class="admin-form" id="adminForm">
+          <div class="admin-form-grid">
+            <div class="admin-field full">
+              <label for="f_date">Draw Date</label>
+              <input type="text" id="f_date" placeholder="e.g. 07/11/2026" maxlength="10" autocomplete="off">
+            </div>
+            <div class="admin-field">
+              <label for="f_drawNo">Draw No.</label>
+              <input type="text" id="f_drawNo" placeholder="e.g. 6209/26" maxlength="10" autocomplete="off">
+            </div>
+            <div class="admin-field">
+              <label for="f_first">1st Prize (4 digits)</label>
+              <input type="text" id="f_first" placeholder="e.g. 1234" maxlength="4" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="admin-field">
+              <label for="f_second">2nd Prize (4 digits)</label>
+              <input type="text" id="f_second" placeholder="e.g. 5678" maxlength="4" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="admin-field">
+              <label for="f_third">3rd Prize (4 digits)</label>
+              <input type="text" id="f_third" placeholder="e.g. 9012" maxlength="4" inputmode="numeric" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="admin-actions">
+            <button class="btn-admin" onclick="addNewDraw()">✦ Inscribe &amp; Recast ✦</button>
+            <button class="btn-admin danger" onclick="clearAllDraws()">Clear All Records</button>
+          </div>
+
+          <div class="admin-msg" id="adminMsg"></div>
+        </div>
+      </div>
     </div>
 
   </div>
 
-  <!-- ============================================================
-       EXTERNAL DATA FILE — edit this file to update results.
-       The file "results-data.js" should be in the same folder.
-       ============================================================ -->
-  <script src="results-data.js"></script>
-
   <script>
     // ============================================================
-    // FALLBACK DATA — used only if results-data.js is missing/empty.
-    // Edit results-data.js instead of this.
+    // DATA STORAGE — localStorage key
     // ============================================================
-    const FALLBACK_HISTORY = [
-      {
-        date: "04/11/2026",
-        drawNo: "6208/26",
-        first: "5833",
-        second: "5984",
-        third: "0356"
-      },
-      {
-        date: "01/11/2026",
-        drawNo: "6207/26",
-        first: "2270",
-        second: "9276",
-        third: "4275"
-      },
-      {
-        date: "31/10/2026",
-        drawNo: "6206/26",
-        first: "0878",
-        second: "2783",
-        third: "1789"
-      }
+    const STORAGE_KEY = "witchOracleHistory";
+
+    // Fallback seed data (only used if localStorage is empty)
+    const SEED_HISTORY = [
+      { date: "04/11/2026", drawNo: "6208/26", first: "5833", second: "5984", third: "0356" },
+      { date: "01/11/2026", drawNo: "6207/26", first: "2270", second: "9276", third: "4275" },
+      { date: "31/10/2026", drawNo: "6206/26", first: "0878", second: "2783", third: "1789" }
     ];
 
-    // Resolve the active history array
-    const activeHistory =
-      (typeof historyData !== "undefined" && Array.isArray(historyData) && historyData.length > 0)
-        ? historyData
-        : FALLBACK_HISTORY;
+    // ------------------------------------------------------------
+    // STORAGE HELPERS
+    // ------------------------------------------------------------
+    function loadHistory() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [...SEED_HISTORY];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || parsed.length === 0) return [...SEED_HISTORY];
+        return parsed;
+      } catch (e) {
+        console.warn("Could not load history — using seed data.", e);
+        return [...SEED_HISTORY];
+      }
+    }
+
+    function saveHistory(arr) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        return true;
+      } catch (e) {
+        console.error("Could not save history.", e);
+        return false;
+      }
+    }
+
+    // Active data (loaded once, then kept in sync)
+    let activeHistory = loadHistory();
 
     // ------------------------------------------------------------
     // RENDER HISTORY GRID (latest 3 draws)
@@ -737,19 +892,28 @@
 
       const latest = activeHistory.slice(0, 3);
 
-      grid.innerHTML = latest.map(draw => `
-        <div class="history-item">
-          <div class="history-date">${draw.date || "—"}<br>Draw ${draw.drawNo || "—"}</div>
-          <div class="prize-row">1st <span class="prize-num">${draw.first || "—"}</span></div>
-          <div class="prize-row">2nd <span class="prize-num">${draw.second || "—"}</span></div>
-          <div class="prize-row">3rd <span class="prize-num">${draw.third || "—"}</span></div>
-        </div>
-      `).join("");
+      if (latest.length === 0) {
+        grid.innerHTML = `<div class="history-item" style="grid-column:1/-1;">
+          <div class="history-date">No records yet</div>
+          <div class="prize-row" style="text-transform:none; font-style:italic; color:var(--sage-dust);">
+            Use "Inscribe a New Draw" below to add the first entry.
+          </div>
+        </div>`;
+      } else {
+        grid.innerHTML = latest.map(draw => `
+          <div class="history-item">
+            <div class="history-date">${draw.date || "—"}<br>Draw ${draw.drawNo || "—"}</div>
+            <div class="prize-row">1st <span class="prize-num">${draw.first || "—"}</span></div>
+            <div class="prize-row">2nd <span class="prize-num">${draw.second || "—"}</span></div>
+            <div class="prize-row">3rd <span class="prize-num">${draw.third || "—"}</span></div>
+          </div>
+        `).join("");
+      }
 
-      // Show when the data was last refreshed
       if (note) {
         const latestDate = latest[0]?.date || "unknown";
-        note.textContent = `Last updated from data file · latest draw ${latestDate}`;
+        const count = activeHistory.length;
+        note.textContent = `Last updated · latest draw ${latestDate} · ${count} record${count === 1 ? "" : "s"} inscribed`;
       }
     }
 
@@ -768,7 +932,6 @@
           }
         });
       });
-      // Guard: if no data, fall back to uniform weights
       if (Object.keys(weights).length === 0) {
         for (let d = 0; d <= 9; d++) weights[d] = 1;
       }
@@ -776,7 +939,7 @@
     }
 
     // ------------------------------------------------------------
-    // GENERATE A 4D NUMBER (weighted + chaos)
+    // GENERATE 4D NUMBER
     // ------------------------------------------------------------
     function generate4D(weights, chaosFactor = 0.2) {
       const digits = Object.keys(weights).sort((a, b) => weights[b] - weights[a]);
@@ -837,14 +1000,12 @@
         });
       }
 
-      // Prime Oracle Pick
       const top = predictions[0];
       document.getElementById("topCardArcana").innerText = top.arcana.name;
       document.getElementById("topCombo").innerText = top.pair;
       document.getElementById("topMeaning").innerText = `"${top.arcana.meaning}"`;
       document.getElementById("topResonance").innerText = `Oracle Resonance ${top.score}%`;
 
-      // Alternative Arcana
       const secondaryContainer = document.getElementById("secondaryList");
       secondaryContainer.innerHTML = predictions.slice(1).map((item, idx) => `
         <div class="secondary-card">
@@ -858,6 +1019,95 @@
           </div>
         </div>
       `).join("");
+    }
+
+    // ------------------------------------------------------------
+    // ADMIN PANEL LOGIC
+    // ------------------------------------------------------------
+    function toggleAdminPanel() {
+      const form = document.getElementById("adminForm");
+      form.classList.toggle("open");
+      if (form.classList.contains("open")) {
+        // Auto-fill date with today for convenience
+        const dateInput = document.getElementById("f_date");
+        if (!dateInput.value) {
+          const today = new Date();
+          const dd = String(today.getDate()).padStart(2, "0");
+          const mm = String(today.getMonth() + 1).padStart(2, "0");
+          const yyyy = today.getFullYear();
+          dateInput.value = `${dd}/${mm}/${yyyy}`;
+        }
+        document.getElementById("f_drawNo").focus();
+      }
+      setAdminMsg("", "");
+    }
+
+    function setAdminMsg(text, type) {
+      const msg = document.getElementById("adminMsg");
+      msg.textContent = text;
+      msg.className = "admin-msg" + (type ? " " + type : "");
+    }
+
+    function addNewDraw() {
+      const date = document.getElementById("f_date").value.trim();
+      const drawNo = document.getElementById("f_drawNo").value.trim();
+      const first = document.getElementById("f_first").value.trim();
+      const second = document.getElementById("f_second").value.trim();
+      const third = document.getElementById("f_third").value.trim();
+
+      // Validation
+      if (!date || !drawNo || !first || !second || !third) {
+        setAdminMsg("☾ All fields must be filled before inscribing. ☽", "err");
+        return;
+      }
+      const isFourDigits = v => /^\d{4}$/.test(v);
+      if (!isFourDigits(first) || !isFourDigits(second) || !isFourDigits(third)) {
+        setAdminMsg("☾ Prize numbers must be exactly 4 digits each. ☽", "err");
+        return;
+      }
+
+      // Check for duplicate draw number
+      if (activeHistory.some(d => d.drawNo === drawNo)) {
+        setAdminMsg(`☾ Draw ${drawNo} already exists in the records. ☽`, "err");
+        return;
+      }
+
+      // Prepend new draw (newest first)
+      const newDraw = { date, drawNo, first, second, third };
+      activeHistory.unshift(newDraw);
+
+      if (!saveHistory(activeHistory)) {
+        setAdminMsg("☾ Failed to save — browser storage may be full or blocked. ☽", "err");
+        return;
+      }
+
+      // Reset form
+      document.getElementById("f_date").value = "";
+      document.getElementById("f_drawNo").value = "";
+      document.getElementById("f_first").value = "";
+      document.getElementById("f_second").value = "";
+      document.getElementById("f_third").value = "";
+
+      setAdminMsg(`✦ Draw ${drawNo} inscribed. The Oracle has been recast. ✦`, "ok");
+
+      // Re-render everything
+      renderHistoryGrid();
+      castDivination();
+    }
+
+    function clearAllDraws() {
+      if (!confirm("Are you sure you wish to erase all inscribed draws? The Oracle will fall back to its seed memories.")) {
+        return;
+      }
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        console.warn("Could not clear localStorage.", e);
+      }
+      activeHistory = [...SEED_HISTORY];
+      renderHistoryGrid();
+      castDivination();
+      setAdminMsg("✦ Records cleared — seed memories restored. ✦", "ok");
     }
 
     // ------------------------------------------------------------
