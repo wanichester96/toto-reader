@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=UnifrakturCook:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Morandi-inspired palette — dusty, muted, witchy */
       --moss-veil: #5a5e4e;
       --moss-deep: #3d4035;
       --sage-dust: #8a8d7a;
@@ -29,14 +28,8 @@
       --glow-soft: rgba(176, 138, 134, 0.18);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
 
     body {
       font-family: 'Cormorant Garamond', serif;
@@ -44,8 +37,7 @@
       background-image:
         radial-gradient(ellipse 80% 50% at 50% -10%, #4a4138 0%, transparent 65%),
         radial-gradient(ellipse 60% 40% at 15% 100%, #3d3830 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 88% 92%, #4a3a40 0%, transparent 60%),
-        radial-gradient(ellipse 30% 30% at 70% 15%, rgba(107, 84, 104, 0.15) 0%, transparent 60%);
+        radial-gradient(ellipse 50% 40% at 88% 92%, #4a3a40 0%, transparent 60%);
       background-attachment: fixed;
       color: var(--parchment);
       min-height: 100vh;
@@ -54,50 +46,6 @@
       align-items: center;
       padding: 3.5rem 1.25rem 5rem;
       position: relative;
-      overflow-x: hidden;
-      line-height: 1.55;
-    }
-
-    /* ✦ whimsical floating motes of dust & starlight ✦ */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image:
-        radial-gradient(2px 2px at 8% 12%, rgba(217, 210, 192, 0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 6%, rgba(232, 224, 204, 0.35) 0%, transparent 100%),
-        radial-gradient(2px 2px at 62% 18%, rgba(176, 138, 134, 0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 82% 8%, rgba(217, 210, 192, 0.4) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 44% 48%, rgba(232, 224, 204, 0.25) 0%, transparent 100%),
-        radial-gradient(1px 1px at 72% 62%, rgba(176, 138, 134, 0.3) 0%, transparent 100%),
-        radial-gradient(2px 2px at 12% 74%, rgba(217, 210, 192, 0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 58% 84%, rgba(232, 224, 204, 0.25) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 90% 46%, rgba(176, 138, 134, 0.35) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 92%, rgba(217, 210, 192, 0.3) 0%, transparent 100%);
-      background-size: 300px 300px;
-      animation: floatMotes 160s linear infinite;
-      opacity: 0.9;
-    }
-
-    @keyframes floatMotes {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-300px, -300px); }
-    }
-
-    /* faint circular sigil backdrop */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 50% 42%, transparent 0%, transparent 30%, rgba(176, 138, 134, 0.025) 30.3%, transparent 31%),
-        radial-gradient(circle at 50% 42%, transparent 0%, transparent 44%, rgba(107, 84, 104, 0.03) 44.4%, transparent 45%),
-        radial-gradient(circle at 50% 42%, transparent 0%, transparent 58%, rgba(138, 141, 122, 0.025) 58.4%, transparent 59%);
-      opacity: 0.95;
     }
 
     header {
@@ -108,23 +56,16 @@
       max-width: 780px;
     }
 
-    /* —— OLD ENGLISH / BLACKLETTER TITLE —— */
     h1 {
       font-family: 'UnifrakturMaguntia', 'UnifrakturCook', 'Cinzel', serif;
       font-weight: 400;
       font-size: clamp(2rem, 6vw, 3.4rem);
-      letter-spacing: 1px;
       color: var(--parchment-warm);
       margin: 0;
       line-height: 1.2;
-      text-shadow:
-        0 2px 0 rgba(42, 38, 32, 0.8),
-        0 0 40px rgba(176, 138, 134, 0.22),
-        0 0 80px rgba(107, 84, 104, 0.15);
-      filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.45));
+      text-shadow: 0 2px 0 rgba(42, 38, 32, 0.8), 0 0 40px rgba(176, 138, 134, 0.22);
     }
 
-    /* decorative flourish under title */
     .title-flourish {
       font-family: 'UnifrakturMaguntia', serif;
       font-size: 1rem;
@@ -132,7 +73,6 @@
       color: var(--rose-dust);
       opacity: 0.7;
       margin-top: 0.5rem;
-      text-shadow: 0 0 18px var(--glow-soft);
     }
 
     .subtitle {
@@ -145,7 +85,6 @@
       text-transform: uppercase;
     }
 
-    /* whimsical divider with moons & stars */
     .oracle-divider {
       display: flex;
       align-items: center;
@@ -154,18 +93,11 @@
       margin-top: 1.75rem;
       color: var(--rose-dust);
     }
-    .oracle-divider::before,
-    .oracle-divider::after {
+    .oracle-divider::before, .oracle-divider::after {
       content: "";
       flex: 0 0 70px;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--plum-dust), transparent);
-    }
-    .oracle-divider span {
-      font-size: 1.1rem;
-      letter-spacing: 8px;
-      opacity: 0.85;
-      text-shadow: 0 0 16px var(--glow-soft);
     }
 
     .container {
@@ -178,57 +110,35 @@
       gap: 2rem;
     }
 
-    /* ── arcane panel — Morandi dusty parchment ── */
     .card {
       position: relative;
-      background:
-        linear-gradient(168deg, rgba(74, 65, 56, 0.45) 0%, rgba(42, 38, 32, 0.78) 55%, rgba(74, 52, 72, 0.35) 100%);
+      background: linear-gradient(168deg, rgba(74, 65, 56, 0.45) 0%, rgba(42, 38, 32, 0.78) 55%, rgba(74, 52, 72, 0.35) 100%);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-dust);
       border-radius: 2px;
       padding: 2.1rem 1.9rem;
-      box-shadow:
-        0 26px 55px -20px rgba(0, 0, 0, 0.85),
-        inset 0 0 50px rgba(176, 138, 134, 0.035),
-        inset 0 1px 0 rgba(232, 224, 204, 0.04);
-      overflow: hidden;
+      box-shadow: 0 26px 55px -20px rgba(0, 0, 0, 0.85);
     }
 
-    /* inner hairline frame — delicate, witchy */
     .card::before {
       content: "";
       position: absolute;
       inset: 8px;
       border: 1px solid rgba(176, 138, 134, 0.12);
-      border-radius: 1px;
       pointer-events: none;
     }
 
-    /* corner crescent-moon glyphs */
-    .card::after {
+    .card::after, .card .corner-glyph {
       content: "☾";
       position: absolute;
       top: 10px;
-      left: 13px;
       font-size: 0.8rem;
       color: var(--rose-dust);
       opacity: 0.5;
-      pointer-events: none;
-      text-shadow: 0 0 12px var(--glow-soft);
     }
-    .card .corner-glyph {
-      position: absolute;
-      top: 10px;
-      right: 13px;
-      font-size: 0.8rem;
-      color: var(--rose-dust);
-      opacity: 0.5;
-      pointer-events: none;
-      text-shadow: 0 0 12px var(--glow-soft);
-    }
+    .card::after { left: 13px; }
+    .card .corner-glyph { right: 13px; }
 
-    /* —— OLD ENGLISH SECTION HEADERS —— */
     h2 {
       font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
       font-weight: 400;
@@ -239,7 +149,6 @@
       margin: 0 0 1.75rem;
       padding-bottom: 0.85rem;
       position: relative;
-      text-shadow: 0 0 24px rgba(176, 138, 134, 0.2), 0 2px 0 rgba(42, 38, 32, 0.6);
     }
     h2::after {
       content: "✦";
@@ -249,8 +158,6 @@
       transform: translateX(-50%);
       font-size: 0.55rem;
       color: var(--rose-dust);
-      opacity: 0.75;
-      background: transparent;
     }
     h2::before {
       content: "";
@@ -262,24 +169,14 @@
       background: linear-gradient(90deg, transparent, rgba(176, 138, 134, 0.35), transparent);
     }
 
-    /* ── featured prime oracle — the witch's chosen card ── */
     .featured-prediction {
-      background:
-        radial-gradient(ellipse 75% 90% at 50% 0%, rgba(74, 52, 72, 0.55) 0%, transparent 70%),
-        linear-gradient(170deg, rgba(74, 65, 56, 0.5) 0%, rgba(30, 24, 28, 0.92) 100%);
+      background: radial-gradient(ellipse 75% 90% at 50% 0%, rgba(74, 52, 72, 0.55) 0%, transparent 70%),
+                  linear-gradient(170deg, rgba(74, 65, 56, 0.5) 0%, rgba(30, 24, 28, 0.92) 100%);
       border: 1px solid rgba(176, 138, 134, 0.4);
-      box-shadow:
-        0 0 60px -12px rgba(176, 138, 134, 0.22),
-        0 28px 65px -22px #000,
-        inset 0 0 70px rgba(107, 84, 104, 0.08);
       text-align: center;
       padding: 2.8rem 1.5rem 2.6rem;
     }
-    .featured-prediction::before {
-      border-color: rgba(176, 138, 134, 0.18);
-    }
 
-    /* crown badge — dusty rose */
     .crown-badge {
       display: inline-block;
       font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
@@ -291,20 +188,15 @@
       padding: 0.4rem 1.6rem;
       border-radius: 40px;
       margin-bottom: 1.5rem;
-      box-shadow: 0 0 25px rgba(107, 84, 104, 0.3), inset 0 0 14px rgba(176, 138, 134, 0.08);
-      text-shadow: 0 1px 2px rgba(42, 38, 32, 0.7);
     }
 
     .prime-arcana-name {
       font-family: 'UnifrakturMaguntia', 'Cormorant Garamond', serif;
       font-size: clamp(1.15rem, 3vw, 1.6rem);
-      letter-spacing: 1px;
       color: var(--parchment-warm);
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 30px rgba(176, 138, 134, 0.3), 0 2px 0 rgba(42, 38, 32, 0.5);
     }
 
-    /* prime combo — hero numerals in elegant serif */
     .prime-combo {
       font-family: 'Cinzel', serif;
       font-weight: 600;
@@ -312,27 +204,7 @@
       letter-spacing: 6px;
       color: #f0e8d6;
       margin: 1.1rem 0 1rem;
-      text-shadow:
-        0 0 24px rgba(176, 138, 134, 0.4),
-        0 0 70px rgba(107, 84, 104, 0.3),
-        0 3px 0 rgba(30, 24, 28, 0.7);
-      position: relative;
-      display: inline-block;
-      padding: 0 0.5rem;
     }
-    .prime-combo::before,
-    .prime-combo::after {
-      content: "☽";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.9rem;
-      color: var(--rose-dust);
-      opacity: 0.65;
-      text-shadow: 0 0 14px var(--glow-soft);
-    }
-    .prime-combo::before { left: -1.6rem; }
-    .prime-combo::after { right: -1.6rem; }
 
     .prime-meaning {
       font-family: 'Cormorant Garamond', serif;
@@ -342,7 +214,6 @@
       max-width: 520px;
       margin: 0 auto;
       line-height: 1.65;
-      letter-spacing: 0.3px;
     }
 
     .prime-resonance {
@@ -358,16 +229,8 @@
       border-top: 1px solid rgba(176, 138, 134, 0.2);
       border-bottom: 1px solid rgba(176, 138, 134, 0.2);
       padding: 0.5rem 1.3rem;
-      text-shadow: 0 0 16px var(--glow-soft);
-    }
-    .prime-resonance::before,
-    .prime-resonance::after {
-      content: "✦";
-      font-size: 0.5rem;
-      opacity: 0.6;
     }
 
-    /* ── divination control — the witch's circle ── */
     .oracle-controls {
       text-align: center;
       padding: 2.2rem 1.5rem;
@@ -384,58 +247,14 @@
       font-size: 2.3rem;
       color: var(--rose-faded);
       cursor: pointer;
-      position: relative;
-      background:
-        radial-gradient(circle at 35% 30%, rgba(176, 138, 134, 0.18), transparent 65%),
-        radial-gradient(circle at 50% 50%, #3d3830 0%, #2a2620 100%);
+      background: radial-gradient(circle at 50% 50%, #3d3830 0%, #2a2620 100%);
       border: 1px solid rgba(176, 138, 134, 0.35);
-      box-shadow:
-        0 0 0 4px rgba(30, 24, 28, 0.85),
-        0 0 0 5px rgba(176, 138, 134, 0.18),
-        0 0 38px rgba(176, 138, 134, 0.22),
-        inset 0 0 28px rgba(107, 84, 104, 0.15);
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-      user-select: none;
+      transition: transform 0.6s ease;
     }
-    .tarot-seal::before {
-      content: "";
-      position: absolute;
-      inset: -16px;
-      border-radius: 50%;
-      border: 1px dashed rgba(176, 138, 134, 0.22);
-      animation: slow-spin 28s linear infinite;
-    }
-    .tarot-seal::after {
-      content: "✦";
-      position: absolute;
-      inset: -26px;
-      border-radius: 50%;
-      border: 1px dotted rgba(138, 141, 122, 0.18);
-      animation: slow-spin-reverse 38s linear infinite;
-      font-size: 0;
-    }
-    @keyframes slow-spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes slow-spin-reverse {
-      to { transform: rotate(-360deg); }
-    }
-    .tarot-seal:hover {
-      transform: scale(1.07) rotate(12deg);
-      box-shadow:
-        0 0 0 4px rgba(30, 24, 28, 0.85),
-        0 0 0 5px rgba(176, 138, 134, 0.45),
-        0 0 58px rgba(176, 138, 134, 0.4),
-        inset 0 0 38px rgba(107, 84, 104, 0.22);
-    }
-    .tarot-seal:active {
-      transform: scale(0.96);
-    }
+    .tarot-seal:hover { transform: scale(1.07) rotate(12deg); }
 
-    /* —— OLD ENGLISH BUTTON —— */
     .btn-divine {
       font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
-      font-weight: 400;
       font-size: 1rem;
       letter-spacing: 2px;
       color: var(--parchment-warm);
@@ -444,35 +263,13 @@
       padding: 0.95rem 2.6rem;
       border-radius: 2px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
       transition: all 0.4s ease;
-      box-shadow: 0 0 22px -8px rgba(176, 138, 134, 0.3), inset 0 0 20px rgba(176, 138, 134, 0.04);
-      text-shadow: 0 1px 3px rgba(30, 24, 28, 0.7);
-    }
-    .btn-divine::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(232, 224, 204, 0.12), transparent);
-      transition: left 0.7s ease;
     }
     .btn-divine:hover {
       color: var(--ink-soft);
       background: linear-gradient(160deg, var(--parchment-faded), var(--rose-faded));
-      border-color: var(--parchment-warm);
-      box-shadow: 0 0 38px rgba(176, 138, 134, 0.4), 0 8px 26px -10px #000;
-      text-shadow: none;
-      letter-spacing: 3px;
-    }
-    .btn-divine:hover::before {
-      left: 100%;
     }
 
-    /* ── secondary arcana list — dusty little cards ── */
     .secondary-list {
       display: flex;
       flex-direction: column;
@@ -480,7 +277,6 @@
     }
 
     .secondary-card {
-      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -490,22 +286,13 @@
       border-left: 3px solid var(--plum-dust);
       padding: 1.2rem 1.4rem;
       border-radius: 2px;
-      transition: border-left-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 10px 24px -14px #000;
-    }
-    .secondary-card:hover {
-      border-left-color: var(--rose-faded);
-      box-shadow: 0 14px 32px -14px #000, 0 0 28px -8px rgba(176, 138, 134, 0.2);
-      transform: translateX(4px);
     }
 
     .sec-arcana-title {
       font-family: 'UnifrakturMaguntia', 'Cormorant Garamond', serif;
       font-size: 1rem;
-      letter-spacing: 1px;
       color: var(--parchment-warm);
       margin-bottom: 0.35rem;
-      text-shadow: 0 0 14px rgba(176, 138, 134, 0.18), 0 1px 0 rgba(30, 24, 28, 0.5);
     }
 
     .sec-arcana-meaning {
@@ -513,40 +300,17 @@
       font-style: italic;
       font-size: 0.9rem;
       color: var(--mist);
-      line-height: 1.5;
-      max-width: 340px;
-    }
-
-    .sec-combo-side {
-      text-align: right;
-      flex-shrink: 0;
     }
 
     .sec-combo {
       font-family: 'Cinzel', serif;
       font-weight: 600;
       font-size: 1.2rem;
-      letter-spacing: 2.5px;
       color: var(--parchment-warm);
-      text-shadow: 0 0 16px rgba(176, 138, 134, 0.25);
-      white-space: nowrap;
+      letter-spacing: 2.5px;
+      text-align: right;
     }
 
-    .sec-resonance {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
-      color: var(--sage-dust);
-      margin-top: 0.35rem;
-    }
-    .sec-resonance::before {
-      content: "✦ ";
-      color: var(--rose-dust);
-      font-size: 0.55rem;
-    }
-
-    /* ── history grid — tea-stained parchment cards ── */
     .history-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -559,25 +323,9 @@
       border-radius: 2px;
       padding: 1.2rem 0.8rem;
       text-align: center;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-    .history-item:hover {
-      border-color: rgba(176, 138, 134, 0.35);
-      box-shadow: 0 0 30px -10px rgba(176, 138, 134, 0.2);
-    }
-    .history-item::before {
-      content: "☾";
-      position: absolute;
-      top: 6px;
-      left: 8px;
-      font-size: 0.55rem;
-      color: var(--plum-dust);
-      opacity: 0.5;
     }
 
     .history-date {
-      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: 0.72rem;
       letter-spacing: 1.2px;
@@ -586,13 +334,10 @@
       padding-bottom: 0.55rem;
       margin-bottom: 0.7rem;
       text-transform: uppercase;
-      line-height: 1.6;
     }
 
     .prize-row {
-      font-family: 'Cormorant Garamond', serif;
       font-size: 0.78rem;
-      letter-spacing: 1.5px;
       color: var(--mist);
       margin: 0.25rem 0;
       text-transform: uppercase;
@@ -605,52 +350,12 @@
       color: var(--parchment-warm);
       letter-spacing: 2px;
       margin-left: 0.35rem;
-      text-shadow: 0 0 12px rgba(176, 138, 134, 0.2);
     }
 
-    /* ── responsive ── */
     @media (max-width: 720px) {
-      body { padding: 2.2rem 0.9rem 3.5rem; }
-      .card { padding: 1.7rem 1.2rem; }
-      .history-grid { grid-template-columns: 1fr; gap: 0.85rem; }
-      .secondary-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-      }
-      .sec-combo-side { text-align: left; width: 100%; }
-      .sec-combo { font-size: 1.1rem; }
-      .prime-combo::before, .prime-combo::after { display: none; }
-      .prime-combo { letter-spacing: 3px; }
-      .tarot-seal { width: 76px; height: 76px; font-size: 1.9rem; }
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 1.9rem; }
-      .subtitle { letter-spacing: 1.5px; }
-      .btn-divine { padding: 0.8rem 1.6rem; font-size: 0.9rem; }
-      .featured-prediction { padding: 2rem 1rem; }
-      .prime-combo { font-size: 1.5rem; }
-      .title-flourish { letter-spacing: 8px; }
-    }
-
-    /* gentle reveal */
-    .card {
-      animation: card-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .card:nth-child(2) { animation-delay: 0.08s; }
-    .card:nth-child(3) { animation-delay: 0.16s; }
-    .card:nth-child(4) { animation-delay: 0.24s; }
-
-    @keyframes card-rise {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .history-grid { grid-template-columns: 1fr; }
+      .secondary-card { flex-direction: column; align-items: flex-start; }
+      .sec-combo { text-align: left; }
     }
   </style>
 </head>
@@ -665,7 +370,7 @@
 
   <div class="container">
 
-    <!-- Prime Oracle Pick -->
+    <!-- Prime Oracle Pick (Highest Likelihood) -->
     <div class="card featured-prediction" id="topPredictionCard">
       <span class="corner-glyph">☽</span>
       <div class="crown-badge">✦ Prime Oracle Pick ✦</div>
@@ -685,33 +390,31 @@
     <div class="card">
       <span class="corner-glyph">☽</span>
       <h2>Alternative Arcana</h2>
-      <div class="secondary-list" id="secondaryList">
-        <!-- Rendered dynamically -->
-      </div>
+      <div class="secondary-list" id="secondaryList"></div>
     </div>
 
-    <!-- Historical Source -->
+    <!-- Historical Pattern Source (Editable whenever a new draw arrives) -->
     <div class="card">
       <span class="corner-glyph">☽</span>
       <h2>Historical Pattern Source</h2>
       <div class="history-grid">
         <div class="history-item">
-          <div class="history-date">04 / 11 / 2026<br>Draw 6208/26</div>
-          <div class="prize-row">1st <span class="prize-num">5833</span></div>
-          <div class="prize-row">2nd <span class="prize-num">5984</span></div>
-          <div class="prize-row">3rd <span class="prize-num">0356</span></div>
+          <div class="history-date">04 / 11 / 2026<br>Draw 6208/26[cite: 1]</div>
+          <div class="prize-row">1st <span class="prize-num">5833</span>[cite: 1]</div>
+          <div class="prize-row">2nd <span class="prize-num">5984</span>[cite: 1]</div>
+          <div class="prize-row">3rd <span class="prize-num">0356</span>[cite: 1]</div>
         </div>
         <div class="history-item">
-          <div class="history-date">01 / 11 / 2026<br>Draw 6207/26</div>
-          <div class="prize-row">1st <span class="prize-num">2270</span></div>
-          <div class="prize-row">2nd <span class="prize-num">9276</span></div>
-          <div class="prize-row">3rd <span class="prize-num">4275</span></div>
+          <div class="history-date">01 / 11 / 2026<br>Draw 6207/26[cite: 2]</div>
+          <div class="prize-row">1st <span class="prize-num">2270</span>[cite: 2]</div>
+          <div class="prize-row">2nd <span class="prize-num">9276</span>[cite: 2]</div>
+          <div class="prize-row">3rd <span class="prize-num">4275</span>[cite: 2]</div>
         </div>
         <div class="history-item">
-          <div class="history-date">31 / 10 / 2026<br>Draw 6206/26</div>
-          <div class="prize-row">1st <span class="prize-num">0878</span></div>
-          <div class="prize-row">2nd <span class="prize-num">2783</span></div>
-          <div class="prize-row">3rd <span class="prize-num">1789</span></div>
+          <div class="history-date">31 / 10 / 2026<br>Draw 6206/26[cite: 3]</div>
+          <div class="prize-row">1st <span class="prize-num">0878</span>[cite: 3]</div>
+          <div class="prize-row">2nd <span class="prize-num">2783</span>[cite: 3]</div>
+          <div class="prize-row">3rd <span class="prize-num">1789</span>[cite: 3]</div>
         </div>
       </div>
     </div>
@@ -719,14 +422,13 @@
   </div>
 
   <script>
-    // Historical draw numbers
+    // Update this array when new historical draw results are released from Sports Toto
     const historyData = [
-      ["5833", "5984", "0356"],
-      ["2270", "9276", "4275"],
-      ["0878", "2783", "1789"]
+      ["5833", "5984", "0356"],[cite: 1]
+      ["2270", "9276", "4275"],[cite: 2]
+      ["0878", "2783", "1789"] [cite: 3]
     ];
 
-    // Major Arcana with whimsical, witchy meanings
     const majorArcana = [
       { name: "X · The Wheel of Fortune", meaning: "Inevitable change, cycles repeating, divine timing." },
       { name: "XVII · The Star", meaning: "Inspiration, cosmic harmony, a guiding light." },
@@ -734,14 +436,8 @@
       { name: "II · The High Priestess", meaning: "Esoteric wisdom, secrets revealed in patterns." },
       { name: "III · The Empress", meaning: "Abundance, fruitful numerical combinations." },
       { name: "IV · The Emperor", meaning: "Order, structural repetition in sequence." },
-      { name: "0 · The Fool", meaning: "New beginnings, boundless unexpected outcomes." },
-      { name: "XIII · Death", meaning: "Transformation, the end of a losing cycle." },
-      { name: "XVI · The Tower", meaning: "Sudden revelation, breaking old patterns." },
       { name: "XIX · The Sun", meaning: "Radiance, clarity, the winning path illuminated." },
-      { name: "XVIII · The Moon", meaning: "Intuition, shadows guiding the numbers." },
-      { name: "XX · Judgement", meaning: "A clarion call to fateful combinations." },
-      { name: "VI · The Lovers", meaning: "Harmonious pairs draw the jackpot near." },
-      { name: "XI · Justice", meaning: "Balance restored, the scales tip in your favour." }
+      { name: "XVIII · The Moon", meaning: "Intuition, shadows guiding the numbers." }
     ];
 
     function calculateDigitWeights() {
@@ -780,24 +476,19 @@
 
         const arcanaIndex = Math.floor(Math.random() * availableArcana.length);
         const arcana = availableArcana.splice(arcanaIndex, 1)[0];
-
         const score = (95 - (i * 5) - (Math.random() * 3)).toFixed(1);
 
-        predictions.push({
-          pair: `${num1} + ${num2}`,
-          arcana: arcana,
-          score: score
-        });
+        predictions.push({ pair: `${num1} + ${num2}`, arcana: arcana, score: score });
       }
 
-      // Prime Oracle Pick
+      // Prime Oracle Pick (Top spot)
       const top = predictions[0];
       document.getElementById("topCardArcana").innerText = top.arcana.name;
       document.getElementById("topCombo").innerText = top.pair;
       document.getElementById("topMeaning").innerText = `"${top.arcana.meaning}"`;
       document.getElementById("topResonance").innerText = `Oracle Resonance ${top.score}%`;
 
-      // Alternative Arcana
+      // Alternative Options
       const secondaryContainer = document.getElementById("secondaryList");
       secondaryContainer.innerHTML = predictions.slice(1).map((item, idx) => `
         <div class="secondary-card">
@@ -805,9 +496,9 @@
             <div class="sec-arcana-title">Option ${idx + 2} · ${item.arcana.name}</div>
             <div class="sec-arcana-meaning">${item.arcana.meaning}</div>
           </div>
-          <div class="sec-combo-side">
+          <div>
             <div class="sec-combo">${item.pair}</div>
-            <div class="sec-resonance">Resonance ${item.score}%</div>
+            <div style="font-size:0.75rem; color:var(--sage-dust); text-align:right; font-style:italic;">Resonance ${item.score}%</div>
           </div>
         </div>
       `).join("");
