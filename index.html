@@ -879,11 +879,10 @@
       }
     }
 
-    // Active data (loaded once, then kept in sync)
     let activeHistory = loadHistory();
 
     // ------------------------------------------------------------
-    // RENDER HISTORY GRID (latest 3 draws)
+    // RENDER HISTORY GRID
     // ------------------------------------------------------------
     function renderHistoryGrid() {
       const grid = document.getElementById("historyGrid");
@@ -918,41 +917,90 @@
     }
 
     // ------------------------------------------------------------
-    // DIGIT FREQUENCY WEIGHTS
+    // STATISTICAL & PATTERN ANALYSIS ENGINE
     // ------------------------------------------------------------
-    function calculateDigitWeights() {
-      const weights = {};
-      activeHistory.forEach(draw => {
-        [draw.first, draw.second, draw.third].forEach(numStr => {
-          if (!numStr) return;
-          for (let char of String(numStr)) {
-            if (/\d/.test(char)) {
-              weights[char] = (weights[char] || 0) + 1;
+    function analyzeHistory() {
+      const globalFreq = {};
+      const posFreq = [{}, {}, {}, {}];
+      const pairFreq = {};
+
+      for (let d = 0; d <= 9; d++) {
+        globalFreq[d] = 0;
+        for (let p = 0; p < 4; p++) posFreq[p][d] = 0;
+      }
+
+      activeHistory.forEach((draw, drawIdx) => {
+        // Weight 1st prize higher than 2nd/3rd in historical analysis
+        const prizes = [
+          { num: draw.first, weight: 3 },
+          { num: draw.second, weight: 2 },
+          { num: draw.third, weight: 1 }
+        ];
+
+        prizes.forEach(p => {
+          if (!p.num || !/^\d{4}$/.test(p.num)) return;
+          const str = String(p.num);
+
+          for (let i = 0; i < 4; i++) {
+            const digit = parseInt(str[i], 10);
+            globalFreq[digit] += p.weight;
+            posFreq[i][digit] += p.weight;
+
+            // Pair frequency pattern
+            for (let j = i + 1; j < 4; j++) {
+              const pairKey = [str[i], str[j]].sort().join('');
+              pairFreq[pairKey] = (pairFreq[pairKey] || 0) + p.weight;
             }
           }
         });
       });
-      if (Object.keys(weights).length === 0) {
-        for (let d = 0; d <= 9; d++) weights[d] = 1;
-      }
-      return weights;
+
+      return { globalFreq, posFreq, pairFreq };
     }
 
-    // ------------------------------------------------------------
-    // GENERATE 4D NUMBER
-    // ------------------------------------------------------------
-    function generate4D(weights, chaosFactor = 0.2) {
-      const digits = Object.keys(weights).sort((a, b) => weights[b] - weights[a]);
+    // Generate 4D number constructed from positional and pattern analysis
+    function generatePatternGuided4D(stats, variance = 0.1) {
       let result = "";
-      for (let i = 0; i < 4; i++) {
-        if (Math.random() > chaosFactor) {
-          const chosenIndex = Math.floor(Math.random() * Math.min(5, digits.length));
-          result += digits[chosenIndex];
+      for (let pos = 0; pos < 4; pos++) {
+        const pWeights = stats.posFreq[pos];
+        // 85% chance to favor highest positional probability digit, 15% random variation
+        if (Math.random() > variance) {
+          const sortedDigits = Object.keys(pWeights).sort((a, b) => pWeights[b] - pWeights[a]);
+          // Pick from top 3 position candidates
+          const topPickIndex = Math.floor(Math.random() * Math.min(3, sortedDigits.length));
+          result += sortedDigits[topPickIndex];
         } else {
           result += Math.floor(Math.random() * 10);
         }
       }
       return result;
+    }
+
+    // Mathematical probability/resonance score calculation
+    function evaluateComboScore(numStr, stats) {
+      let score = 0;
+      if (!/^\d{4}$/.test(numStr)) return 0;
+
+      // 1. Positional Alignment Score
+      for (let i = 0; i < 4; i++) {
+        const d = parseInt(numStr[i], 10);
+        score += (stats.posFreq[i][d] || 0) * 4;
+      }
+
+      // 2. Co-occurrence Pair Pattern Score
+      for (let i = 0; i < 4; i++) {
+        for (let j = i + 1; j < 4; j++) {
+          const pairKey = [numStr[i], numStr[j]].sort().join('');
+          score += (stats.pairFreq[pairKey] || 0) * 3;
+        }
+      }
+
+      // 3. Global Digit Frequency Score
+      for (let char of numStr) {
+        score += (stats.globalFreq[char] || 0);
+      }
+
+      return score;
     }
 
     // ------------------------------------------------------------
@@ -976,41 +1024,78 @@
     ];
 
     // ------------------------------------------------------------
-    // CAST DIVINATION
+    // CAST DIVINATION & RANK BY PROBABILITY
     // ------------------------------------------------------------
     function castDivination() {
-      const weights = calculateDigitWeights();
+      const stats = analyzeHistory();
       const availableArcana = [...majorArcana];
-      const predictions = [];
 
-      for (let i = 0; i < 4; i++) {
-        const num1 = generate4D(weights, 0.15 + (i * 0.1));
-        let num2 = generate4D(weights, 0.15 + (i * 0.1));
-        while (num1 === num2) num2 = generate4D(weights, 0.15 + (i * 0.1));
+      // Step 1: Generate candidate combinations pool
+      const candidates = [];
+      const poolSize = 30; // Generate candidates to rank mathematically
 
-        const arcanaIndex = Math.floor(Math.random() * availableArcana.length);
-        const arcana = availableArcana.splice(arcanaIndex, 1)[0];
+      for (let i = 0; i < poolSize; i++) {
+        const num1 = generatePatternGuided4D(stats, 0.05 + (i * 0.01));
+        let num2 = generatePatternGuided4D(stats, 0.05 + (i * 0.01));
+        while (num1 === num2) {
+          num2 = generatePatternGuided4D(stats, 0.1);
+        }
 
-        const score = (95 - (i * 5) - (Math.random() * 3)).toFixed(1);
+        const score1 = evaluateComboScore(num1, stats);
+        const score2 = evaluateComboScore(num2, stats);
+        const combinedRawScore = score1 + score2;
 
-        predictions.push({
+        candidates.push({
           pair: `${num1} + ${num2}`,
-          arcana: arcana,
-          score: score
+          rawScore: combinedRawScore
         });
       }
 
-      const top = predictions[0];
+      // Step 2: Sort combinations strictly by highest mathematical probability score
+      candidates.sort((a, b) => b.rawScore - a.rawScore);
+
+      // Step 3: Select unique top combinations
+      const uniquePredictions = [];
+      const seenPairs = new Set();
+
+      for (let c of candidates) {
+        if (!seenPairs.has(c.pair)) {
+          seenPairs.add(c.pair);
+          uniquePredictions.push(c);
+        }
+        if (uniquePredictions.length === 4) break;
+      }
+
+      // Calculate normalized resonance percentage (Highest at top)
+      const maxScore = uniquePredictions[0].rawScore || 1;
+      const finalPredictions = uniquePredictions.map((pred, i) => {
+        const arcanaIndex = Math.floor(Math.random() * availableArcana.length);
+        const arcana = availableArcana.splice(arcanaIndex, 1)[0];
+
+        // Normalize score between 88.0% and 98.8%
+        const normalized = 98.8 - (i * 2.5) - ((1 - (pred.rawScore / maxScore)) * 3);
+        const score = Math.max(82.0, normalized).toFixed(1);
+
+        return {
+          pair: pred.pair,
+          arcana: arcana,
+          score: score
+        };
+      });
+
+      // Display HIGHEST probability number on top
+      const top = finalPredictions[0];
       document.getElementById("topCardArcana").innerText = top.arcana.name;
       document.getElementById("topCombo").innerText = top.pair;
       document.getElementById("topMeaning").innerText = `"${top.arcana.meaning}"`;
       document.getElementById("topResonance").innerText = `Oracle Resonance ${top.score}%`;
 
+      // Display lower probability alternatives below in descending order
       const secondaryContainer = document.getElementById("secondaryList");
-      secondaryContainer.innerHTML = predictions.slice(1).map((item, idx) => `
+      secondaryContainer.innerHTML = finalPredictions.slice(1).map((item, idx) => `
         <div class="secondary-card">
           <div>
-            <div class="sec-arcana-title">Option ${idx + 2} · ${item.arcana.name}</div>
+            <div class="sec-arcana-title">Rank ${idx + 2} · ${item.arcana.name}</div>
             <div class="sec-arcana-meaning">${item.arcana.meaning}</div>
           </div>
           <div class="sec-combo-side">
@@ -1028,7 +1113,6 @@
       const form = document.getElementById("adminForm");
       form.classList.toggle("open");
       if (form.classList.contains("open")) {
-        // Auto-fill date with today for convenience
         const dateInput = document.getElementById("f_date");
         if (!dateInput.value) {
           const today = new Date();
@@ -1055,7 +1139,6 @@
       const second = document.getElementById("f_second").value.trim();
       const third = document.getElementById("f_third").value.trim();
 
-      // Validation
       if (!date || !drawNo || !first || !second || !third) {
         setAdminMsg("☾ All fields must be filled before inscribing. ☽", "err");
         return;
@@ -1066,13 +1149,11 @@
         return;
       }
 
-      // Check for duplicate draw number
       if (activeHistory.some(d => d.drawNo === drawNo)) {
         setAdminMsg(`☾ Draw ${drawNo} already exists in the records. ☽`, "err");
         return;
       }
 
-      // Prepend new draw (newest first)
       const newDraw = { date, drawNo, first, second, third };
       activeHistory.unshift(newDraw);
 
@@ -1081,16 +1162,14 @@
         return;
       }
 
-      // Reset form
       document.getElementById("f_date").value = "";
       document.getElementById("f_drawNo").value = "";
       document.getElementById("f_first").value = "";
       document.getElementById("f_second").value = "";
       document.getElementById("f_third").value = "";
 
-      setAdminMsg(`✦ Draw ${drawNo} inscribed. The Oracle has been recast. ✦`, "ok");
+      setAdminMsg(`✦ Draw ${drawNo} inscribed. Patterns recalculating... ✦`, "ok");
 
-      // Re-render everything
       renderHistoryGrid();
       castDivination();
     }
